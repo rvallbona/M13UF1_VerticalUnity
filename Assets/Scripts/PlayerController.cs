@@ -5,15 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerInputActions playerInputAction;
-    private bool JumpPress;
+    private bool jumpPress;
+    private bool shiftPress = false;
     private Vector2 moveInput;
 
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float playerSpeed;
+    [SerializeField] private float jumpForce;
     private Vector3 playerVelocity;
     public float rotationSpeed;
-    private float gravityForce = -9.81f;
+    [SerializeField] private float gravityForce;
     private bool groundedPlayer;
 
     [SerializeField] private GameObject player;
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
         Gravity();
         Inputs();
         Movement();
+        Jump();
         controller.Move(playerVelocity * Time.deltaTime);
     }
     private void FixedUpdate()
@@ -48,7 +51,8 @@ public class PlayerController : MonoBehaviour
     }
     void Inputs()
     {
-        JumpPress = Input_Manager._INPUT_MANAGER.GetSpaceButtonPressed();
+        jumpPress = Input_Manager._INPUT_MANAGER.GetSpaceButtonPressed();
+        shiftPress = Input_Manager._INPUT_MANAGER.GetShiftButtonPressed();
     }
     void Gravity()
     {
@@ -64,9 +68,9 @@ public class PlayerController : MonoBehaviour
     }
     void Movement()
     {
+        
         Vector3 direction = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0) * new Vector3(moveInput.x, 0, moveInput.y);
         direction.Normalize();
-        Debug.Log(direction);
         playerVelocity.x = direction.x * playerSpeed;
         playerVelocity.z = direction.z * playerSpeed;
         if (direction != Vector3.zero)
@@ -75,6 +79,21 @@ public class PlayerController : MonoBehaviour
 
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
             gameObject.transform.forward = direction;
+        }
+        //if (shiftPress && groundedPlayer)
+        //{
+        //    playerSpeed = playerSpeed * 2;
+        //}
+        //else if (!shiftPress)
+        //{
+        //    playerSpeed = playerSpeed / 2;
+        //}
+    }
+    void Jump()
+    {
+        if (jumpPress && groundedPlayer)
+        {
+            playerVelocity.y += jumpForce + gravityForce * Time.deltaTime;
         }
     }
 }
