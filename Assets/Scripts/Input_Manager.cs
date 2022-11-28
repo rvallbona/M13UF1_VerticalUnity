@@ -30,6 +30,7 @@ public class Input_Manager : MonoBehaviour
         timeSinceJumpPressed += Time.deltaTime;
         InputSystem.Update();
     }
+
     private void JumpButtonPressed(InputAction.CallbackContext context)
     {
         timeSinceJumpPressed = 0f;
@@ -38,8 +39,6 @@ public class Input_Manager : MonoBehaviour
     private void LeftAxisUpdate(InputAction.CallbackContext context)
     {
         leftAxisValue = context.ReadValue<Vector2>();
-        Debug.Log("Magnitude: " + leftAxisValue.magnitude);
-        Debug.Log("Normalize: " + leftAxisValue.normalized);
     }
     public bool GetSpaceButtonPressed()
     {
