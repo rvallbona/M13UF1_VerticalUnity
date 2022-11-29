@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour
     private bool canDoubleJump;
     private Vector3 playerVelocity;
     public float rotationSpeed;
+    const float gravity = -40;
     [SerializeField] private float gravityForce;
+    private float gravityScale = 1f;
     private bool groundedPlayer;
 
     [SerializeField] private GameObject player;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         playerInputAction = new PlayerInputActions();
+        gravityForce = gravity;
     }
     private void OnEnable()
     {
@@ -41,11 +44,13 @@ public class PlayerController : MonoBehaviour
     }
     private void Update()
     {
-        Gravity();
         Inputs();
+        wallGravity();
+        Gravity();
         Movement();
         Jump();
         Sprint();
+
         controller.Move(playerVelocity * Time.deltaTime);
     }
     private void FixedUpdate()
@@ -63,11 +68,27 @@ public class PlayerController : MonoBehaviour
         groundedPlayer = controller.isGrounded;
         if (!groundedPlayer)
         {
-            playerVelocity.y += gravityForce * Time.deltaTime;
+            playerVelocity.y += gravityForce * gravityScale * Time.deltaTime;
         }
         else
         {
-            playerVelocity.y = gravityForce * Time.deltaTime;
+            playerVelocity.y = gravityForce * gravityScale * Time.deltaTime;
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 0.7f);
+    }
+    void wallGravity()
+    {
+        if (Physics.Linecast(transform.position, transform.position + transform.forward * 0.7f) && playerVelocity.y <= 0)
+        {
+            gravityScale = .1f;
+        }
+        else
+        {
+            gravityForce = gravity;
+            gravityScale = 1;
         }
     }
     void Movement()
