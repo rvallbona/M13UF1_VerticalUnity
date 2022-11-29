@@ -8,6 +8,7 @@ public class Input_Manager : MonoBehaviour
     public static Input_Manager _INPUT_MANAGER;
     private float timeSinceJumpPressed = 0f;
     private float timeSinceShiftPressed = 0f;
+    private float timeSinceShiftDespressed = 0f; 
     private Vector2 leftAxisValue = Vector2.zero;
     private void Awake()
     {
@@ -21,8 +22,8 @@ public class Input_Manager : MonoBehaviour
             playerInputs.Character.Enable();
             playerInputs.Character.Jump.performed += JumpButtonPressed;
             playerInputs.Character.Move.performed += LeftAxisUpdate;
-            playerInputs.Character.Sprint.performed += ShiftButtonPressed;
-
+            playerInputs.Character.Sprint.started += ShiftButtonPressed;
+            playerInputs.Character.Sprint.canceled += ShiftButtonDespressed;
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(this);
         }
@@ -31,6 +32,7 @@ public class Input_Manager : MonoBehaviour
     {
         timeSinceJumpPressed += Time.deltaTime;
         timeSinceShiftPressed += Time.deltaTime;
+        timeSinceShiftDespressed += Time.deltaTime;
         InputSystem.Update();
     }
     //Move
@@ -38,7 +40,7 @@ public class Input_Manager : MonoBehaviour
     {
         leftAxisValue = context.ReadValue<Vector2>();
     }
-    //Sprint Move
+    //Sprint Move start
     private void ShiftButtonPressed(InputAction.CallbackContext context)
     {
         timeSinceShiftPressed = 0;
@@ -46,6 +48,15 @@ public class Input_Manager : MonoBehaviour
     public bool GetShiftButtonPressed()
     {
         return this.timeSinceShiftPressed == 0f;
+    }
+    //Sprint Move canceled
+    private void ShiftButtonDespressed(InputAction.CallbackContext context)
+    {
+        timeSinceShiftDespressed = 0;
+    }
+    public bool GetShiftButtonDespressed()
+    {
+        return this.timeSinceShiftDespressed == 0f;
     }
     //Jump
     private void JumpButtonPressed(InputAction.CallbackContext context)

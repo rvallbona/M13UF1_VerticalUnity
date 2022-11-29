@@ -6,13 +6,15 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerInputActions playerInputAction;
     private bool jumpPress;
-    private bool shiftPress = false;
+    private bool shiftPress;
+    private bool shiftDespress; 
     private Vector2 moveInput;
 
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpForce;
+    private bool canDoubleJump;
     private Vector3 playerVelocity;
     public float rotationSpeed;
     [SerializeField] private float gravityForce;
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
         Inputs();
         Movement();
         Jump();
+        Sprint();
         controller.Move(playerVelocity * Time.deltaTime);
     }
     private void FixedUpdate()
@@ -53,6 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         jumpPress = Input_Manager._INPUT_MANAGER.GetSpaceButtonPressed();
         shiftPress = Input_Manager._INPUT_MANAGER.GetShiftButtonPressed();
+        shiftDespress = Input_Manager._INPUT_MANAGER.GetShiftButtonDespressed();
     }
     void Gravity()
     {
@@ -68,7 +72,6 @@ public class PlayerController : MonoBehaviour
     }
     void Movement()
     {
-        
         Vector3 direction = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0) * new Vector3(moveInput.x, 0, moveInput.y);
         direction.Normalize();
         playerVelocity.x = direction.x * playerSpeed;
@@ -80,20 +83,36 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
             gameObject.transform.forward = direction;
         }
-        //if (shiftPress && groundedPlayer)
-        //{
-        //    playerSpeed = playerSpeed * 2;
-        //}
-        //else if (!shiftPress)
-        //{
-        //    playerSpeed = playerSpeed / 2;
-        //}
+    }
+    void Jumping(float jumpForce)
+    {
+        playerVelocity.y += jumpForce + gravityForce * Time.deltaTime;
     }
     void Jump()
     {
         if (jumpPress && groundedPlayer)
         {
-            playerVelocity.y += jumpForce + gravityForce * Time.deltaTime;
+            canDoubleJump = true;
+            Jumping(jumpForce);
+        }
+        else
+        {
+            if (jumpPress && canDoubleJump && !groundedPlayer)
+            {
+                canDoubleJump = false;
+                Jumping(jumpForce);
+            }
+        }
+    }
+    private void Sprint()
+    {
+        if (shiftPress)
+        {
+            playerSpeed = playerSpeed * 2;
+        }
+        if (shiftDespress)
+        {
+            playerSpeed = playerSpeed * .5f;
         }
     }
 }
