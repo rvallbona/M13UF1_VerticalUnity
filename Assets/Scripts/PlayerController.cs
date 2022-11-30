@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private bool crouchDespress;
     private bool dashPress;
     private Vector2 moveInput;
+    Vector3 direction;
 
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float gravityForce;
     private float gravityScale = 1f;
     private bool groundedPlayer;
+    [SerializeField] float dashSpeed;
+    [SerializeField] float dashTime;
 
     [SerializeField] private GameObject player;
     private CharacterController controller;
@@ -101,7 +104,7 @@ public class PlayerController : MonoBehaviour
     }
     void Movement()
     {
-        Vector3 direction = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0) * new Vector3(moveInput.x, 0, moveInput.y);
+        direction = Quaternion.Euler(0, cam.transform.eulerAngles.y, 0) * new Vector3(moveInput.x, 0, moveInput.y);
         direction.Normalize();
         playerVelocity.x = direction.x * playerSpeed;
         playerVelocity.z = direction.z * playerSpeed;
@@ -157,9 +160,20 @@ public class PlayerController : MonoBehaviour
     }
     private void Dash()
     {
-        if (shiftPress && dashPress)
+        if (dashPress)
         {
-            Debug.Log("Dash");
+            Debug.Log("Dash con shift");
+            StartCoroutine(Dash());
+        }
+        IEnumerator Dash()
+        {
+            float startTime = Time.deltaTime;
+            while (Time.time < startTime + dashTime)
+            {
+                controller.Move(direction * dashSpeed * Time.deltaTime);
+                yield return null; 
+            }
         }
     }
+    
 }
