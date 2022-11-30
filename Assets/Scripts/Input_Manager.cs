@@ -8,7 +8,9 @@ public class Input_Manager : MonoBehaviour
     public static Input_Manager _INPUT_MANAGER;
     private float timeSinceJumpPressed = 0f;
     private float timeSinceShiftPressed = 0f;
-    private float timeSinceShiftDespressed = 0f; 
+    private float timeSinceShiftDespressed = 0f;
+    private float timeSinceCrouchPressed = 0f;
+    private float timeSinceCrouchDespressed = 0f;
     private Vector2 leftAxisValue = Vector2.zero;
     private void Awake()
     {
@@ -24,6 +26,8 @@ public class Input_Manager : MonoBehaviour
             playerInputs.Character.Move.performed += LeftAxisUpdate;
             playerInputs.Character.Sprint.started += ShiftButtonPressed;
             playerInputs.Character.Sprint.canceled += ShiftButtonDespressed;
+            playerInputs.Character.Crouch.started += CrouchButtonPressed;
+            playerInputs.Character.Crouch.canceled += CrouchButtonDespressed;
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(this);
         }
@@ -33,6 +37,8 @@ public class Input_Manager : MonoBehaviour
         timeSinceJumpPressed += Time.deltaTime;
         timeSinceShiftPressed += Time.deltaTime;
         timeSinceShiftDespressed += Time.deltaTime;
+        timeSinceCrouchPressed += Time.deltaTime;
+        timeSinceCrouchDespressed += Time.deltaTime;
         InputSystem.Update();
     }
     //Move
@@ -66,5 +72,23 @@ public class Input_Manager : MonoBehaviour
     public bool GetSpaceButtonPressed()
     {
         return this.timeSinceJumpPressed == 0f;
+    }
+    //Crouch Move start
+    private void CrouchButtonPressed(InputAction.CallbackContext context)
+    {
+        timeSinceCrouchPressed = 0;
+    }
+    public bool GetCrouchButtonPressed()
+    {
+        return this.timeSinceCrouchPressed == 0f;
+    }
+    //Crouch Move canceled
+    private void CrouchButtonDespressed(InputAction.CallbackContext context)
+    {
+        timeSinceCrouchDespressed = 0;
+    }
+    public bool GetCrouchButtonDespressed()
+    {
+        return this.timeSinceCrouchDespressed == 0f;
     }
 }

@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
     private PlayerInputActions playerInputAction;
     private bool jumpPress;
     private bool shiftPress;
-    private bool shiftDespress; 
+    private bool shiftDespress;
+    private bool crouchPress;
+    private bool crouchDespress;
     private Vector2 moveInput;
 
     [SerializeField] private float acceleration;
@@ -50,6 +52,7 @@ public class PlayerController : MonoBehaviour
         Movement();
         Jump();
         Sprint();
+        Crouch();
 
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -62,6 +65,8 @@ public class PlayerController : MonoBehaviour
         jumpPress = Input_Manager._INPUT_MANAGER.GetSpaceButtonPressed();
         shiftPress = Input_Manager._INPUT_MANAGER.GetShiftButtonPressed();
         shiftDespress = Input_Manager._INPUT_MANAGER.GetShiftButtonDespressed();
+        crouchPress = Input_Manager._INPUT_MANAGER.GetCrouchButtonPressed();
+        crouchDespress = Input_Manager._INPUT_MANAGER.GetCrouchButtonDespressed();
     }
     void Gravity()
     {
@@ -134,6 +139,17 @@ public class PlayerController : MonoBehaviour
         if (shiftDespress)
         {
             playerSpeed = playerSpeed * .5f;
+        }
+    }
+    private void Crouch()
+    {
+        if (crouchPress)
+        {
+            playerSpeed = playerSpeed * .5f;
+        }
+        if (crouchDespress)
+        {
+            playerSpeed = playerSpeed * 2;
         }
     }
 }

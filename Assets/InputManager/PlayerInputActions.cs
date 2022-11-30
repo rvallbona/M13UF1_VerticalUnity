@@ -62,6 +62,24 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""69db3ce4-ce1d-42b4-a020-b62d52148251"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""63189506-3165-421e-9fe9-3cf1eb7cf862"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +192,28 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d5149be5-4a07-4c87-b0ab-6f25326f3685"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""97bb3395-fe74-4aae-af66-6e8ff3d0c5e9"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -186,6 +226,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Character_Jump = m_Character.FindAction("Jump", throwIfNotFound: true);
         m_Character_View = m_Character.FindAction("View", throwIfNotFound: true);
         m_Character_Sprint = m_Character.FindAction("Sprint", throwIfNotFound: true);
+        m_Character_Crouch = m_Character.FindAction("Crouch", throwIfNotFound: true);
+        m_Character_Dash = m_Character.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +291,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_Jump;
     private readonly InputAction m_Character_View;
     private readonly InputAction m_Character_Sprint;
+    private readonly InputAction m_Character_Crouch;
+    private readonly InputAction m_Character_Dash;
     public struct CharacterActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -257,6 +301,8 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Character_Jump;
         public InputAction @View => m_Wrapper.m_Character_View;
         public InputAction @Sprint => m_Wrapper.m_Character_Sprint;
+        public InputAction @Crouch => m_Wrapper.m_Character_Crouch;
+        public InputAction @Dash => m_Wrapper.m_Character_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Character; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -278,6 +324,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnSprint;
+                @Crouch.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCrouch;
+                @Crouch.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCrouch;
+                @Crouch.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnCrouch;
+                @Dash.started -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_CharacterActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_CharacterActionsCallbackInterface = instance;
             if (instance != null)
@@ -294,6 +346,12 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Crouch.started += instance.OnCrouch;
+                @Crouch.performed += instance.OnCrouch;
+                @Crouch.canceled += instance.OnCrouch;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -304,5 +362,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnView(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

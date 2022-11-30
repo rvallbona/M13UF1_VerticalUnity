@@ -40,6 +40,24 @@
                     "processors": "",
                     "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "PassThrough",
+                    "id": "69db3ce4-ce1d-42b4-a020-b62d52148251",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "63189506-3165-421e-9fe9-3cf1eb7cf862",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -150,6 +168,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d5149be5-4a07-4c87-b0ab-6f25326f3685",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "97bb3395-fe74-4aae-af66-6e8ff3d0c5e9",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
