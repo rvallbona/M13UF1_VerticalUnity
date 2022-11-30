@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private bool shiftDespress;
     private bool crouchPress;
     private bool crouchDespress;
+    private bool dashPress;
     private Vector2 moveInput;
 
     [SerializeField] private float acceleration;
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Sprint();
         Crouch();
+        Dash();
 
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -67,6 +69,7 @@ public class PlayerController : MonoBehaviour
         shiftDespress = Input_Manager._INPUT_MANAGER.GetShiftButtonDespressed();
         crouchPress = Input_Manager._INPUT_MANAGER.GetCrouchButtonPressed();
         crouchDespress = Input_Manager._INPUT_MANAGER.GetCrouchButtonDespressed();
+        dashPress = Input_Manager._INPUT_MANAGER.GetDashButtonPressed();
     }
     void Gravity()
     {
@@ -150,6 +153,13 @@ public class PlayerController : MonoBehaviour
         if (crouchDespress)
         {
             playerSpeed = playerSpeed * 2;
+        }
+    }
+    private void Dash()
+    {
+        if (shiftPress && dashPress)
+        {
+            Debug.Log("Dash");
         }
     }
 }
