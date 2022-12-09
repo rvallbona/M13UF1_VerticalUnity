@@ -30,6 +30,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject player;
     private CharacterController controller;
+
+    private Animator anim;
+
     [SerializeField] Camera cam;
     private void Awake()
     {
@@ -47,6 +50,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        anim = gameObject.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -115,6 +119,8 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
             gameObject.transform.forward = direction;
         }
+        anim.SetFloat("Speed", controller.velocity.magnitude);
+        if (groundedPlayer) { anim.SetBool("Jump", false); }
     }
     void Jumping(float jumpForce)
     {
@@ -126,6 +132,7 @@ public class PlayerController : MonoBehaviour
         {
             canDoubleJump = true;
             Jumping(jumpForce);
+            anim.SetBool("Jump", true);
         }
         else
         {
