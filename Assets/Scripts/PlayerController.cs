@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpForce;
+    public bool jumping;
     private bool canDoubleJump;
     private Vector3 playerVelocity;
     public float rotationSpeed;
@@ -30,8 +31,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject player;
     private CharacterController controller;
-
-    private Animator anim;
 
     [SerializeField] Camera cam;
     private void Awake()
@@ -50,7 +49,6 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
-        anim = gameObject.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -62,7 +60,6 @@ public class PlayerController : MonoBehaviour
         Sprint();
         Crouch();
         Dash();
-
         controller.Move(playerVelocity * Time.deltaTime);
     }
     private void FixedUpdate()
@@ -119,8 +116,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
             gameObject.transform.forward = direction;
         }
-        anim.SetFloat("Speed", controller.velocity.magnitude);
-        if (groundedPlayer) { anim.SetBool("Jump", false); }
     }
     void Jumping(float jumpForce)
     {
@@ -132,7 +127,6 @@ public class PlayerController : MonoBehaviour
         {
             canDoubleJump = true;
             Jumping(jumpForce);
-            anim.SetBool("Jump", true);
         }
         else
         {
@@ -156,11 +150,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Crouch()
     {
-        if (crouchPress)
+        if (crouchPress && groundedPlayer)
         {
             playerSpeed = playerSpeed * .5f;
         }
-        if (crouchDespress)
+        if (crouchDespress && groundedPlayer)
         {
             playerSpeed = playerSpeed * 2;
         }
@@ -182,5 +176,8 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    
+    public float GetCurrentSpeed()
+    {
+        return this.controller.velocity.magnitude;
+    }
 }
