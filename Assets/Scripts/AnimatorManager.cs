@@ -15,6 +15,6 @@ public class AnimatorManager : MonoBehaviour
     private void Update()
     {
         animator.SetFloat("Speed", playerController.GetCurrentSpeed());
-        animator.SetBool("Jump", Input_Manager._INPUT_MANAGER.GetSpaceButtonPressed());
+        //animator.SetBool("Jump", Input_Manager._INPUT_MANAGER.GetSpaceButtonPressed());
     }
 }

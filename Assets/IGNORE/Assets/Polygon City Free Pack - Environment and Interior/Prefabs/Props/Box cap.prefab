@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33509131521929832}
   - component: {fileID: 23597354149624574}
   - component: {fileID: 64122523623996306}
+  - component: {fileID: 2733254180053991878}
   m_Layer: 0
   m_Name: Box cap
   m_TagString: Untagged
@@ -98,3 +99,15 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300242, guid: 7c481f901e6fd6544a2901233ce8f8b2, type: 3}
+--- !u!114 &2733254180053991878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661289290001598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2651a8c48465848b3baf4ae7cdc434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -28,11 +28,15 @@ public class PlayerController : MonoBehaviour
     private bool groundedPlayer;
     [SerializeField] float dashSpeed;
     [SerializeField] float dashTime;
+    [SerializeField] float platformJumpForce;
+    [SerializeField] float wallJumpForce;
+    private float timerWallJump;
 
     [SerializeField] private GameObject player;
     private CharacterController controller;
 
     [SerializeField] Camera cam;
+    Animator anim;
     private void Awake()
     {
         playerInputAction = new PlayerInputActions();
@@ -49,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        anim = gameObject.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -59,6 +64,7 @@ public class PlayerController : MonoBehaviour
         Jump();
         Sprint();
         Crouch();
+        WallJump();
         Dash();
         controller.Move(playerVelocity * Time.deltaTime);
     }
@@ -116,6 +122,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationSpeed * Time.deltaTime);
             gameObject.transform.forward = direction;
         }
+        if (groundedPlayer) { anim.SetBool("Jump", false); }
     }
     void Jumping(float jumpForce)
     {
@@ -127,6 +134,7 @@ public class PlayerController : MonoBehaviour
         {
             canDoubleJump = true;
             Jumping(jumpForce);
+            anim.SetBool("Jump", true);
         }
         else
         {
@@ -134,6 +142,7 @@ public class PlayerController : MonoBehaviour
             {
                 canDoubleJump = false;
                 Jumping(jumpForce);
+                anim.SetBool("Jump", true);
             }
         }
     }
@@ -152,11 +161,15 @@ public class PlayerController : MonoBehaviour
     {
         if (crouchPress && groundedPlayer)
         {
+            anim.SetBool("Crouch", true);
             playerSpeed = playerSpeed * .5f;
+            //controller.height = 2f;
         }
         if (crouchDespress && groundedPlayer)
         {
+            anim.SetBool("Crouch", false);
             playerSpeed = playerSpeed * 2;
+            //controller.height = 1f;
         }
     }
     private void Dash()
@@ -176,8 +189,27 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
+    public void PlatformJump()
+    {
+        Jumping(platformJumpForce);
+        anim.SetBool("Jump", true);
+    }
     public float GetCurrentSpeed()
     {
         return this.controller.velocity.magnitude;
+    }
+    void WallJump()
+    {
+        timerWallJump += Time.deltaTime;
+        if (!groundedPlayer && controller.collisionFlags == CollisionFlags.Sides)
+        {
+            if (jumpPress && timerWallJump > 1f)
+            {
+                Debug.Log("wallJump");
+                Jumping(wallJumpForce);
+                anim.SetBool("Jump", true);
+                timerWallJump = 0;
+            }
+        }
     }
 }
