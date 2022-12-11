@@ -159,17 +159,17 @@ public class PlayerController : MonoBehaviour
     }
     private void Crouch()
     {
-        if (crouchPress && groundedPlayer)
+        if (crouchPress)
         {
-            anim.SetBool("Crouch", true);
             playerSpeed = playerSpeed * .5f;
             //controller.height = 2f;
+            anim.SetBool("Crouch", true);
         }
-        if (crouchDespress && groundedPlayer)
+        if (crouchDespress)
         {
-            anim.SetBool("Crouch", false);
             playerSpeed = playerSpeed * 2;
             //controller.height = 1f;
+            anim.SetBool("Crouch", false);
         }
     }
     private void Dash()
@@ -205,7 +205,6 @@ public class PlayerController : MonoBehaviour
         {
             if (jumpPress && timerWallJump > 1f)
             {
-                Debug.Log("wallJump");
                 Jumping(wallJumpForce);
                 anim.SetBool("Jump", true);
                 timerWallJump = 0;
