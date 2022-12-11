@@ -14,7 +14,7 @@ public class Input_Manager : MonoBehaviour
     private float timeSinceShiftDespressed = 0f;
     private float timeSinceCrouchPressed = 0f;
     private float timeSinceCrouchDespressed = 0f;
-
+    private float timeSincePausePressed = 0f;
     private float timeSinceDashPressed = 0f;
     #endregion
     private Vector2 leftAxisValue = Vector2.zero;
@@ -36,6 +36,7 @@ public class Input_Manager : MonoBehaviour
             playerInputs.Character.Crouch.started += CrouchButtonPressed;
             playerInputs.Character.Crouch.canceled += CrouchButtonDespressed;
             playerInputs.Character.Dash.performed += DashButtonPressed;
+            playerInputs.Character.Pause.performed += PauseButtonPressed;
             #endregion
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(this);
@@ -50,6 +51,7 @@ public class Input_Manager : MonoBehaviour
         timeSinceCrouchPressed += Time.deltaTime;
         timeSinceCrouchDespressed += Time.deltaTime;
         timeSinceDashPressed += Time.deltaTime;
+        timeSincePausePressed += Time.deltaTime;
         #endregion
         InputSystem.Update();
     }
@@ -117,6 +119,16 @@ public class Input_Manager : MonoBehaviour
     public bool GetDashButtonPressed()
     {
         return this.timeSinceDashPressed == 0f;
+    }
+    #endregion
+    #region Pause
+    private void PauseButtonPressed(InputAction.CallbackContext context)
+    {
+        timeSincePausePressed = 0;
+    }
+    public bool GetPButtonPressed()
+    {
+        return this.timeSincePausePressed == 0f;
     }
     #endregion
 }

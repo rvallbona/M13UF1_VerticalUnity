@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private bool crouchPress;
     private bool crouchDespress;
     private bool dashPress;
+    private bool pausePress;
     private Vector2 moveInput;
     Vector3 direction;
 
@@ -37,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Camera cam;
     Animator anim;
+
+    public static bool GameIsPaused = false;
+    public GameObject pauseMenuUI;
     private void Awake()
     {
         playerInputAction = new PlayerInputActions();
@@ -62,6 +66,7 @@ public class PlayerController : MonoBehaviour
         Gravity();
         Movement();
         Jump();
+        PauseMenu();
         Sprint();
         Crouch();
         WallJump();
@@ -80,6 +85,7 @@ public class PlayerController : MonoBehaviour
         crouchPress = Input_Manager._INPUT_MANAGER.GetCrouchButtonPressed();
         crouchDespress = Input_Manager._INPUT_MANAGER.GetCrouchButtonDespressed();
         dashPress = Input_Manager._INPUT_MANAGER.GetDashButtonPressed();
+        pausePress = Input_Manager._INPUT_MANAGER.GetPButtonPressed();
     }
     void Gravity()
     {
@@ -209,5 +215,31 @@ public class PlayerController : MonoBehaviour
                 timerWallJump = 0;
             }
         }
+    }
+    void PauseMenu()
+    {
+        if (pausePress)
+        {
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause();
+            }
+        }
+    }
+    private void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1;
+        GameIsPaused = false;
+    }
+    private void Pause()
+    {
+        pauseMenuUI.SetActive(true);
+        Time.timeScale = 0;
+        GameIsPaused = true;
     }
 }

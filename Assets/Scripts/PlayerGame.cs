@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +20,7 @@ public class PlayerGame : MonoBehaviour
         Debug.Log(live);
         Debug.Log(bottle);
     }
+
     public void Damage(int dmg)
     {
         if (!godMode && live >= 0)
