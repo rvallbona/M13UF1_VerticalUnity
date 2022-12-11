@@ -192,7 +192,6 @@ public class PlayerController : MonoBehaviour
     public void PlatformJump()
     {
         Jumping(platformJumpForce);
-        anim.SetBool("Jump", true);
     }
     public float GetCurrentSpeed()
     {
