@@ -10,7 +10,6 @@ public class EnemyFollow : MonoBehaviour
     [SerializeField]
     private GameObject player;
     private NavMeshAgent agent;
-    private int destPoint = 0;
 
     [SerializeField] public PlayerGame playerGame;
     public int dmg = 10;
