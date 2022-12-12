@@ -11,6 +11,10 @@ public class EnemyFollow : MonoBehaviour
     private GameObject player;
     private NavMeshAgent agent;
     private int destPoint = 0;
+
+    [SerializeField] public PlayerGame playerGame;
+    public int dmg = 10;
+
     [SerializeField] Animator animator;
     private void Awake()
     {
@@ -71,6 +75,22 @@ public class EnemyFollow : MonoBehaviour
         {
             agent.SetDestination(transform.position);
             currenState = States.PATROL;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Damage");
+            playerGame.Damage(dmg);
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log("Damage");
+            playerGame.Damage(dmg);
         }
     }
 }

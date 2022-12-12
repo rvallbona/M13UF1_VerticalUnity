@@ -15,7 +15,7 @@ public class PlayerGame : MonoBehaviour
     {
         if (live <= 0 || bottle >= 5)
         {
-            RestartLevel("SampleScene");
+            RestartLevel("Tutorial");
         }
         Debug.Log(live);
         Debug.Log(bottle);

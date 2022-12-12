@@ -168,13 +168,11 @@ public class PlayerController : MonoBehaviour
         if (crouchPress)
         {
             playerSpeed = playerSpeed * .5f;
-            //controller.height = 2f;
             anim.SetBool("Crouch", true);
         }
         if (crouchDespress)
         {
             playerSpeed = playerSpeed * 2;
-            //controller.height = 1f;
             anim.SetBool("Crouch", false);
         }
     }
