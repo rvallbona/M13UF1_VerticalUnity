@@ -11,14 +11,19 @@ public class PlayerGame : MonoBehaviour
     [SerializeField] bool godMode = false;
     [SerializeField] float time_goodMode = 1f;
     [SerializeField] int bottle = 0;
+    [SerializeField] GameObject dangerous;
+    private float timerSinceDamage;
     public void Update()
     {
+        timerSinceDamage += Time.deltaTime;
         if (live <= 0 || bottle >= 5)
         {
             RestartLevel("Tutorial");
         }
         Debug.Log(live);
         Debug.Log(bottle);
+        ResetLive();
+        Danger();
     }
 
     public void Damage(int dmg)
@@ -26,6 +31,7 @@ public class PlayerGame : MonoBehaviour
         if (!godMode && live >= 0)
         {
             live -= dmg;
+            timerSinceDamage = 0;
             StartCoroutine(God());
             if (live <= 0)
             {
@@ -51,5 +57,23 @@ public class PlayerGame : MonoBehaviour
     void RestartLevel(string nscene)
     {
         SceneManager.LoadScene(nscene);
+    }
+    void Danger()
+    {
+        if (live <= 20)
+        {
+            dangerous.SetActive(true);
+        }
+        else
+        {
+            dangerous.SetActive(false);
+        }
+    }
+    void ResetLive()
+    {
+        if (timerSinceDamage >= 3 && live < 100)
+        {
+            live += .01f;
+        }
     }
 }
