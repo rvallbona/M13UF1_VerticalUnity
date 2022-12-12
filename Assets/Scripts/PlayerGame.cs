@@ -16,12 +16,14 @@ public class PlayerGame : MonoBehaviour
     public void Update()
     {
         timerSinceDamage += Time.deltaTime;
-        if (live <= 0 || bottle >= 5)
+        if (live <= 0)
         {
-            RestartLevel("Tutorial");
+            NextLevel(3);
         }
-        Debug.Log(live);
-        Debug.Log(bottle);
+        if (bottle >= 5)
+        {
+            NextLevel(2);
+        }
         ResetLive();
         Danger();
     }
@@ -57,6 +59,10 @@ public class PlayerGame : MonoBehaviour
     void RestartLevel(string nscene)
     {
         SceneManager.LoadScene(nscene);
+    }
+    void NextLevel(int num)
+    {
+        SceneManager.LoadScene(num);
     }
     void Danger()
     {

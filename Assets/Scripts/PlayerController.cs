@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera cam;
     Animator anim;
 
-    public static bool GameIsPaused = false;
+    private bool isPaused;
     public GameObject pauseMenuUI;
     private void Awake()
     {
@@ -216,28 +216,28 @@ public class PlayerController : MonoBehaviour
     }
     void PauseMenu()
     {
+        isPaused = !isPaused;
         if (pausePress)
         {
-            if (GameIsPaused)
-            {
-                Resume();
-            }
-            else
-            {
-                Pause();
-            }
+            Debug.Log("pause");
+            Pause();
         }
-    }
-    private void Resume()
-    {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1;
-        GameIsPaused = false;
+        else if (pausePress && isPaused)
+        {
+            Debug.Log("Resume");
+            Resume();
+        }
     }
     private void Pause()
     {
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0;
-        GameIsPaused = true;
+        isPaused = true;
+    }
+    private void Resume()
+    {
+        pauseMenuUI.SetActive(false);
+        Time.timeScale = 1;
+        isPaused = false;
     }
 }

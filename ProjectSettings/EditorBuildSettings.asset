@@ -8,5 +8,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: 4eff93f132e26dc46a90ab657d60b102
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 71d572810c9c51d42908db6d84806e56
+  - enabled: 1
+    path: Assets/Scenes/win.unity
+    guid: 2bce6ee927cb46c48982fb4ee2f3e40e
+  - enabled: 1
+    path: Assets/Scenes/lose.unity
+    guid: a09707c7381715d41a0a7ed9e7843051
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b8ab45bdca32f9d4f8c64c97db6c8a0b, type: 2}
