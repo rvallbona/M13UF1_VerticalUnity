@@ -11,6 +11,7 @@ public class EnemyFollow : MonoBehaviour
     private GameObject player;
     private NavMeshAgent agent;
     private int destPoint = 0;
+    [SerializeField] Animator animator;
     private void Awake()
     {
         currenState = States.PATROL;
@@ -19,6 +20,7 @@ public class EnemyFollow : MonoBehaviour
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         agent.autoBraking = false;
     }
     private void Update()
