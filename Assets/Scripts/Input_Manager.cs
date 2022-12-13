@@ -17,6 +17,7 @@ public class Input_Manager : MonoBehaviour
     private float timeSincePausePressed = 0f;
     private float timeSinceDashPressed = 0f;
     #endregion
+    private Vector2 mousePosition = Vector2.zero;
     private Vector2 leftAxisValue = Vector2.zero;
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class Input_Manager : MonoBehaviour
             playerInputs.Character.Crouch.canceled += CrouchButtonDespressed;
             playerInputs.Character.Dash.performed += DashButtonPressed;
             playerInputs.Character.Pause.performed += PauseButtonPressed;
+            playerInputs.Character.View.performed += MousePositionUpdate;
             #endregion
             _INPUT_MANAGER = this;
             DontDestroyOnLoad(this);
@@ -119,6 +121,12 @@ public class Input_Manager : MonoBehaviour
     public bool GetDashButtonPressed()
     {
         return this.timeSinceDashPressed == 0f;
+    }
+    #endregion
+    #region Mouse
+    private void MousePositionUpdate(InputAction.CallbackContext context)
+    {
+        mousePosition = context.ReadValue<Vector2>();
     }
     #endregion
     #region Pause

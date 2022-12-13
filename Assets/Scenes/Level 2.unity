@@ -28068,10 +28068,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da89729b9f9f62428bdaec5ab081f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 1
+  mouseSensitivity: 0.5
   target: {fileID: 425575877}
   distanceFromTarget: 15
-  smoothTime: 0.5
+  smoothTime: 0.15
   cameraLerp: 12
 --- !u!1001 &966777460
 PrefabInstance:

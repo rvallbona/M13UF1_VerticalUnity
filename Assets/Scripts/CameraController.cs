@@ -5,27 +5,38 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [SerializeField]
+    private PlayerInputActions playerInputAction;
     private Vector2 mouseInput;
-    [SerializeField]float mouseSensitivity = 1.0f;
+
+    [SerializeField] float mouseSensitivity = 3.0f;
     [SerializeField] Transform target;
-    [SerializeField] float distanceFromTarget = 15f;
+    [SerializeField] float distanceFromTarget = 5.0f;
+
     private float rotationX;
     private float rotationY;
+
     private Vector3 currentRotation;
     private Vector3 smoothVelocity = Vector3.zero;
-    public float smoothTime = .5f;
-    [SerializeField] private float cameraLerp = 12f;
-    float mouseX;
-    float mouseY;
+    public float smoothTime = 3.0f;
+    [SerializeField] private float cameraLerp = 12f; //12f
     private void Awake()
     {
+        playerInputAction = new PlayerInputActions();
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    private void OnEnable()
+    {
+        playerInputAction.Character.Enable();
+    }
+    private void OnDisable()
+    {
+        playerInputAction.Character.Disable();
     }
     private void FixedUpdate()
     {
-        mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
-        mouseInput = new Vector2(mouseX, mouseY);
+        mouseInput = playerInputAction.Character.View.ReadValue<Vector2>();
+
     }
     void Update()
     {
