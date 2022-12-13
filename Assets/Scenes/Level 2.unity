@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: ac26805710065c94696586f6056486c3, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 4ee62c26480f437478bb5ef84dbea6b4, type: 2}
 --- !u!1001 &873491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18964,10 +18964,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 702578897}
-  - component: {fileID: 702578896}
   - component: {fileID: 702578895}
   - component: {fileID: 702578894}
   - component: {fileID: 702578893}
+  - component: {fileID: 702578898}
   m_Layer: 0
   m_Name: EnemyBoss
   m_TagString: Untagged
@@ -19031,22 +19031,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &702578896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702578892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eb80267b469ac14baf06d02c76f9f4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 425575875}
-  playerGame: {fileID: 425575881}
-  dmg: 10
-  animator: {fileID: 0}
 --- !u!4 &702578897
 Transform:
   m_ObjectHideFlags: 0
@@ -19063,6 +19047,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &702578898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702578892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f66e28365bdcfd44ab9ecb17caad9ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agent: {fileID: 702578895}
+  range: 20
+  centrePoint: {fileID: 702578897}
+  player: {fileID: 425575875}
 --- !u!1001 &702776737
 PrefabInstance:
   m_ObjectHideFlags: 0
