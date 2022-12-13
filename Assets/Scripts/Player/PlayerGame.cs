@@ -10,8 +10,8 @@ public class PlayerGame : MonoBehaviour
     [SerializeField] public float live = 100;
     [SerializeField] bool godMode = false;
     [SerializeField] float time_goodMode = 1f;
-    int bottle = 0;
-    int bottle2 = 0;
+    public int bottle = 0;
+    public int bottle2 = 0;
     [SerializeField] GameObject dangerous;
     private float timerSinceDamage;
     public void Update()
@@ -23,11 +23,11 @@ public class PlayerGame : MonoBehaviour
         }
         if (bottle >= 5)
         {
-            NextLevel(2);//next level
+            NextLevel(1);//next level
         }
         if (bottle2 >= 3)
         {
-            NextLevel(2);//next level
+            NextLevel(1);//next level
         }
         ResetLive();
         Danger();
