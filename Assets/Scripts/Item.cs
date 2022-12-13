@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            playerGame.Coin(value);
+            playerGame.Bottle(value);
             Destroy(bottle);
         }
     }
