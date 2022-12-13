@@ -2,65 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-public class EnemyBoss : MonoBehaviour
+public class EnemyPatrol : MonoBehaviour
 {
-    private enum States { PATROL, CHASE }
-    private States currenState;
     [SerializeField]
     private GameObject player;
     private NavMeshAgent agent;
     [SerializeField] public PlayerGame playerGame;
-    public int dmg = 20;
+    public int dmg = 10;
     [SerializeField] float range;
     [SerializeField] Transform centrePoint;
-    private void Awake()
-    {
-        currenState = States.PATROL;
-        agent = GetComponent<NavMeshAgent>();
-    }
-    private void Start()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.autoBraking = false;
     }
-    private void Update()
+    void Update()
     {
-        switch (currenState)
-        {
-
-            case States.PATROL:
-                PatrolState();
-                break;
-            case States.CHASE:
-                ChaseState();
-                break;
-        }
-    }
-    private void PatrolState()
-    {
-        Patrol();
-    }
-    private void ChaseState()
-    {
-        Debug.Log("Persiguiendo");
-        Walk(player);
-        PatrolTransition(player);
-    }
-    private void Walk(GameObject destination)
-    {
-        agent.SetDestination(destination.transform.position);
-    }
-    private void PatrolTransition(GameObject player)
-    {
-        if (Vector3.Distance(transform.position, player.transform.position) >= 10f)
-        {
-            agent.SetDestination(transform.position);
-            currenState = States.PATROL;
-        }
-    }
-    void Patrol()
-    {
-        Debug.Log("Patrullando");
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             Vector3 point;
@@ -81,7 +37,6 @@ public class EnemyBoss : MonoBehaviour
             result = hit.position;
             return true;
         }
-
         result = Vector3.zero;
         return false;
     }

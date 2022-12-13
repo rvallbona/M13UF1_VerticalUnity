@@ -19,6 +19,7 @@ public class PlatformMove : MonoBehaviour
     }
     void MovePlatform()
     {
+        rb.MovePosition(Vector3.MoveTowards(rb.position, platformPosition[nextPosition].position, platformSpeed * Time.deltaTime));
         if (Vector3.Distance(rb.position, platformPosition[nextPosition].position) <= 0)
         {
             currentPosition = nextPosition;
@@ -28,6 +29,5 @@ public class PlatformMove : MonoBehaviour
         {
             nextPosition = 0;
         }
-        rb.MovePosition(Vector3.MoveTowards(rb.position, platformPosition[nextPosition].position, platformSpeed * Time.deltaTime));
     }
 }

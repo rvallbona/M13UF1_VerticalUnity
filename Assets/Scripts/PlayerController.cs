@@ -222,7 +222,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("pause");
             Pause();
         }
-        else if (pausePress && isPaused)
+        else if (pausePress)
         {
             Debug.Log("Resume");
             Resume();

@@ -5268,6 +5268,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7237468934143522444, guid: 66715d547eb0a6e439567a0290ad4c5d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 7237468934143522444, guid: 66715d547eb0a6e439567a0290ad4c5d, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7237468934143522447, guid: 66715d547eb0a6e439567a0290ad4c5d, type: 3}
       propertyPath: m_Name
       value: Hud (1)
