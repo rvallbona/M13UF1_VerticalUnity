@@ -28065,9 +28065,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3da89729b9f9f62428bdaec5ab081f9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseSensitivity: 1
+  target: {fileID: 425575877}
+  distanceFromTarget: 15
+  smoothTime: 0.5
+  cameraLerp: 12
 --- !u!1001 &966777460
 PrefabInstance:
   m_ObjectHideFlags: 0
