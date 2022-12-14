@@ -7,32 +7,20 @@ using UnityEngine.SceneManagement;
 
 public class PlayerGame : MonoBehaviour
 {
+    SceneController sceneController;
     [SerializeField] public float live = 100;
     [SerializeField] bool godMode = false;
     [SerializeField] float time_goodMode = 1f;
-    public int bottle = 0;
+    public int bottle1 = 0;
     public int bottle2 = 0;
     [SerializeField] GameObject dangerous;
     private float timerSinceDamage;
     public void Update()
     {
         timerSinceDamage += Time.deltaTime;
-        if (live <= 0)
-        {
-            NextLevel(3);
-        }
-        if (bottle >= 5)
-        {
-            NextLevel(1);//next level
-        }
-        if (bottle2 >= 3)
-        {
-            NextLevel(1);//next level
-        }
         ResetLive();
         Danger();
     }
-
     public void Damage(int dmg)
     {
         if (!godMode && live >= 0)
@@ -42,14 +30,9 @@ public class PlayerGame : MonoBehaviour
             StartCoroutine(God());
             if (live <= 0)
             {
-                GameOver();
+                sceneController.CheckLose();
             }
         }
-    }
-    void GameOver()
-    {
-        Debug.Log("GameOver");
-        Time.timeScale = 0;
     }
     IEnumerator God()
     {
@@ -59,19 +42,11 @@ public class PlayerGame : MonoBehaviour
     }
     public void Bottle(int value)
     {
-        bottle += value;
+        bottle1 += value;
     }
     public void Bottle2(int value)
     {
         bottle2 += value;
-    }
-    void RestartLevel(string nscene)
-    {
-        SceneManager.LoadScene(nscene);
-    }
-    void NextLevel(int num)
-    {
-        SceneManager.LoadScene(num);
     }
     void Danger()
     {
