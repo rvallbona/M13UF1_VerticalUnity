@@ -25219,7 +25219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 0.5
-  target: {fileID: 1101868366}
+  target: {fileID: 1358373901}
   distanceFromTarget: 15
   smoothTime: 0.15
   cameraLerp: 12
@@ -28676,11 +28676,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1490849379766892529, guid: b8217b9c1183a5144b666d1dd63980c4, type: 3}
   m_PrefabInstance: {fileID: 1098097040}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1101868366 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2184461488726958455, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
-  m_PrefabInstance: {fileID: 1358373899}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1104613255
 PrefabInstance:
@@ -35456,6 +35451,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625103f59fcd3714bacfc5df8649e999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1358373901 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2184461488726958455, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
+  m_PrefabInstance: {fileID: 1358373899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1361033566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4036771510467332, guid: 95d6657cddf8d8045adf9eb975d04854, type: 3}

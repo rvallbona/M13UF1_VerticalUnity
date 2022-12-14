@@ -16561,6 +16561,11 @@ PrefabInstance:
       objectReference: {fileID: 1526010929}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
+--- !u!4 &552294989 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2184461488726958455, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
+  m_PrefabInstance: {fileID: 552294988}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &554874030
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28826,7 +28831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 0.5
-  target: {fileID: 1672919246}
+  target: {fileID: 552294989}
   distanceFromTarget: 15
   smoothTime: 0.15
   cameraLerp: 12
@@ -50371,11 +50376,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625103f59fcd3714bacfc5df8649e999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1672919246 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2184461488726958455, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
-  m_PrefabInstance: {fileID: 552294988}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1678050307
 PrefabInstance:
   m_ObjectHideFlags: 0
