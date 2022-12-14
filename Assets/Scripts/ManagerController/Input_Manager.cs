@@ -37,7 +37,6 @@ public class Input_Manager : MonoBehaviour
             playerInputs.Character.Crouch.started += CrouchButtonPressed;
             playerInputs.Character.Crouch.canceled += CrouchButtonDespressed;
             playerInputs.Character.Dash.performed += DashButtonPressed;
-            playerInputs.Character.Pause.performed += PauseButtonPressed;
             playerInputs.Character.View.performed += MousePositionUpdate;
             #endregion
             _INPUT_MANAGER = this;
@@ -127,16 +126,6 @@ public class Input_Manager : MonoBehaviour
     private void MousePositionUpdate(InputAction.CallbackContext context)
     {
         mousePosition = context.ReadValue<Vector2>();
-    }
-    #endregion
-    #region Pause
-    private void PauseButtonPressed(InputAction.CallbackContext context)
-    {
-        timeSincePausePressed = 0;
-    }
-    public bool GetPButtonPressed()
-    {
-        return this.timeSincePausePressed == 0f;
     }
     #endregion
 }

@@ -185,6 +185,8 @@ MonoBehaviour:
   player: {fileID: 2184461487115802329}
   cam: {fileID: 0}
   pauseMenuUI: {fileID: 0}
+  optionsMenuUI: {fileID: 0}
+  cheatsMenuUI: {fileID: 0}
 --- !u!114 &2184461488726958458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +214,8 @@ MonoBehaviour:
   live: 100
   godMode: 0
   time_goodMode: 1
+  bottle1: 0
+  bottle2: 0
   dangerous: {fileID: 0}
 --- !u!1001 &2184461487519859311
 PrefabInstance:

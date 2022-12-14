@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
     private void Awake()
     {
         playerInputAction = new PlayerInputActions();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
     private void OnEnable()
     {

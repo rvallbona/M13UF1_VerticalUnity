@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     Animator anim;
 
     private bool isPaused;
-    public GameObject pauseMenuUI;
+    [SerializeField] GameObject pauseMenuUI, optionsMenuUI, cheatsMenuUI;
     private void Awake()
     {
         playerInputAction = new PlayerInputActions();
@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         crouchPress = Input_Manager._INPUT_MANAGER.GetCrouchButtonPressed();
         crouchDespress = Input_Manager._INPUT_MANAGER.GetCrouchButtonDespressed();
         dashPress = Input_Manager._INPUT_MANAGER.GetDashButtonPressed();
-        pausePress = Input_Manager._INPUT_MANAGER.GetPButtonPressed();
+        pausePress = Input.GetKeyDown(KeyCode.Escape);
     }
     void Gravity()
     {
@@ -216,28 +216,27 @@ public class PlayerController : MonoBehaviour
     }
     void PauseMenu()
     {
-        isPaused = !isPaused;
         if (pausePress)
         {
-            Debug.Log("pause");
+            isPaused = !isPaused;
             Pause();
-        }
-        else if (pausePress)
-        {
-            Debug.Log("Resume");
-            Resume();
         }
     }
     private void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0;
-        isPaused = true;
-    }
-    private void Resume()
-    {
-        pauseMenuUI.SetActive(false);
-        Time.timeScale = 1;
-        isPaused = false;
+        if (isPaused)
+        {
+            Debug.Log("pause");
+            pauseMenuUI.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Debug.Log("Resume");
+            pauseMenuUI.SetActive(false);
+            optionsMenuUI.SetActive(false);
+            cheatsMenuUI.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 }
