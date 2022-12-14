@@ -30,4 +30,25 @@ public class PlatformMove : MonoBehaviour
             nextPosition = 0;
         }
     }
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.transform.tag == "Player")
+        {
+            if (col.transform.position.y > transform.position.y)
+            {
+                col.transform.parent = transform;
+            }
+        }
+    }
+    private void OnCollisionStay(Collision col)
+    {
+        if (col.transform.tag == "Player")
+        {
+            if (col.transform.position.y > transform.position.y)
+            {
+                col.transform.position = transform.position;
+            }
+        }
+    }
+
 }

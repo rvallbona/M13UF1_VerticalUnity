@@ -80,7 +80,6 @@ public class EnemyFollow : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Damage");
             playerGame.Damage(dmg);
         }
     }
@@ -88,7 +87,6 @@ public class EnemyFollow : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Damage");
             playerGame.Damage(dmg);
         }
     }

@@ -30,15 +30,11 @@ public class SceneController : MonoBehaviour    //TUTORIAL SCENE CONTROLLER
         bottel1 = game.bottle1;
         bottel2 = game.bottle2;
         live = game.live;
-        Debug.Log(bottel1);
-        Debug.Log(bottel2);
-        Debug.Log(live);
     }
     void CheckWin() 
     {
         if (bottel1 >= numBottles1ToWin && bottel2 >= numBottles2ToWin)
         {
-            Debug.Log("Win");
             NextScene(sceneNumberNext);
         }
     }
@@ -47,8 +43,7 @@ public class SceneController : MonoBehaviour    //TUTORIAL SCENE CONTROLLER
         if (live <= 0)
         {
             Time.timeScale = 0;
-            Debug.Log("GameOver");
-            NextScene(4);
+            NextScene(5);
         }
     }
     void NextScene(int num)

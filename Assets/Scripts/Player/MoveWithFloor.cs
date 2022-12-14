@@ -5,36 +5,25 @@ using UnityEngine;
 public class MoveWithFloor : MonoBehaviour
 {
     CharacterController player;
-
-    GameObject groundIn;
-    string groundName;
-    Vector3 groundPosition;
-    Vector3 lastGroundPosition;
-    string lastGroundName;
-    LayerMask finalmask;
-    void Start()
+    Vector3 groundPosition, lastGroundPosition;
+    string groundName, lastGroundName;
+    private void Start()
     {
-        player = this.GetComponent<CharacterController>();
-        var layer1 = 9;
-        var layer2 = 12;
-        finalmask = ~((1 << layer1) | (1 << layer2));
+        player = GetComponent<CharacterController>();
     }
-    void Update()
+    private void Update()
     {
         if (player.isGrounded)
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, finalmask))
+            if (Physics.SphereCast(transform.position, player.height / 4.2f, - transform.up, out hit))
             {
-                groundIn = hit.collider.gameObject;
-                groundName = groundIn.name;
-                groundPosition = groundIn.transform.position;
-                if ((groundPosition != lastGroundPosition) && (groundName == lastGroundName))
+                GameObject groundedIn = hit.collider.gameObject;
+                groundName = groundedIn.name;
+                groundPosition = groundedIn.transform.position;
+                if (groundPosition != lastGroundPosition && groundName == lastGroundName)
                 {
                     this.transform.position += groundPosition - lastGroundPosition;
-                    player.enabled = false;
-                    player.transform.position = this.transform.position;
-                    player.enabled = true;
                 }
                 lastGroundName = groundName;
                 lastGroundPosition = groundPosition;
@@ -49,6 +38,6 @@ public class MoveWithFloor : MonoBehaviour
     private void OnDrawGizmos()
     {
         player = this.GetComponent<CharacterController>();
-        Gizmos.DrawRay(transform.position, Vector3.down * 3);
+        Gizmos.DrawWireSphere(transform.position, player.height / 4.2f);
     }
 }

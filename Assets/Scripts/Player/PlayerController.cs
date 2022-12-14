@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float acceleration;
     [SerializeField] private float maxSpeed;
-    [SerializeField] private float playerSpeed = 4f;
+    [SerializeField] private float playerSpeed;
     [SerializeField] private float jumpForce;
     public bool jumping;
     private bool canDoubleJump;
@@ -41,6 +41,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isPaused;
     [SerializeField] GameObject pauseMenuUI, optionsMenuUI, cheatsMenuUI;
+
+    Vector3 groundPosition, lastGroundPosition;
+    string groundName, lastGroundName;
+
     private void Awake()
     {
         playerInputAction = new PlayerInputActions();
@@ -67,7 +71,7 @@ public class PlayerController : MonoBehaviour
         Movement();
         Jump();
         PauseMenu();
-        Sprint();
+        //Sprint();
         Crouch();
         WallJump();
         Dash();
@@ -98,10 +102,6 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = gravityForce * gravityScale * Time.deltaTime;
         }
-    }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 0.7f);
     }
     void wallGravity()
     {
@@ -226,13 +226,11 @@ public class PlayerController : MonoBehaviour
     {
         if (isPaused)
         {
-            Debug.Log("pause");
             pauseMenuUI.SetActive(true);
             Time.timeScale = 0;
         }
         else
         {
-            Debug.Log("Resume");
             pauseMenuUI.SetActive(false);
             optionsMenuUI.SetActive(false);
             cheatsMenuUI.SetActive(false);
