@@ -44,7 +44,6 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Damage");
             playerGame.Damage(dmg);
         }
     }
@@ -52,7 +51,6 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Damage");
             playerGame.Damage(dmg);
         }
     }

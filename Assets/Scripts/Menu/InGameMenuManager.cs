@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 public class InGameMenuManager : MonoBehaviour
 {
     [SerializeField] GameObject canvasPauseMenu, canvasOptions, canvasCheats;
+    [SerializeField] AudioSource audioInGame, audioMenu;
     public void ChangeScene(int nscene)
     {
         SceneManager.LoadScene(nscene);
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
     }
     public void ChangeOptionCanvas()
     {
@@ -32,8 +34,10 @@ public class InGameMenuManager : MonoBehaviour
     }
     public void BackGame()
     {
-        Debug.Log("Resume");
         canvasPauseMenu.SetActive(false);
+        audioMenu.Stop();
+        audioInGame.Play();
         Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

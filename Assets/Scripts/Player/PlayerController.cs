@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
     Vector3 groundPosition, lastGroundPosition;
     string groundName, lastGroundName;
 
+    [SerializeField] AudioSource audioInGame, audioMenu; 
     private void Awake()
     {
         playerInputAction = new PlayerInputActions();
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         controller = gameObject.GetComponent<CharacterController>();
         anim = gameObject.GetComponent<Animator>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
     private void Update()
     {
@@ -227,13 +229,19 @@ public class PlayerController : MonoBehaviour
         if (isPaused)
         {
             pauseMenuUI.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0;
+            audioMenu.Play();
+            audioInGame.Stop();
         }
         else
         {
+            Cursor.lockState = CursorLockMode.Locked;
             pauseMenuUI.SetActive(false);
             optionsMenuUI.SetActive(false);
             cheatsMenuUI.SetActive(false);
+            audioMenu.Stop();
+            audioInGame.Play();
             Time.timeScale = 1;
         }
     }

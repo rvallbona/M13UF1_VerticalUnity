@@ -53,7 +53,7 @@ public class EnemyFollow : MonoBehaviour
         RaycastHit hit;
         if (Physics.Linecast(transform.position, player.transform.position, out hit)) { }
         if (hit.collider.gameObject.CompareTag("Player") &&
-        Vector3.Distance(player.transform.position, transform.position) <= 5f) { }
+        Vector3.Distance(player.transform.position, transform.position) <= 3f) { }
         Vector3 vectorPlayerSelf = player.transform.position - transform.position;
         vectorPlayerSelf.Normalize();
         if (Vector3.Angle(transform.forward, vectorPlayerSelf) <= 45f) { }
