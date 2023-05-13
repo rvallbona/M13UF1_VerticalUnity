@@ -28831,10 +28831,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 552294989}
-  distance: 10
-  height: 3
-  rotationDamping: 0.5
-  heightDamping: 0.1
+  distance: 12
+  cameraLerp: 80
+  cam: {fileID: 963194227}
 --- !u!1001 &966777460
 PrefabInstance:
   m_ObjectHideFlags: 0

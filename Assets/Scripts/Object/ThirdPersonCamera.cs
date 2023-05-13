@@ -1,50 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
+    [SerializeField] Transform target;
+    [SerializeField] float distance = 12.0f;
+    [SerializeField] float distanceToIgnore = 10f;
 
-    public Transform target; // El objeto que seguirá la cámara
-    public float distance = 10.0f; // Distancia de la cámara al objeto
-    public float height = 3.0f; // Altura de la cámara respecto al objeto
-    public float rotationDamping = 0.5f; // Suavizado de la rotación de la cámara
-    public float heightDamping = 0.1f; // Suavizado de la altura de la cámara
+    private float rotationX = 5.0f;
+    private float rotationY = 5.0f;
+    private Vector3 smoothVelocity = Vector3.zero;
 
-    private float currentRotationAngle = 0.0f;
-    private float currentHeight = 0.0f;
+    [SerializeField] private float cameraLerp = 80f;
 
-    void LateUpdate()
+    [SerializeField] Camera cam;
+
+    private void LateUpdate()
     {
-        if (!target)
-            return;
+        rotationX += Input.GetAxis("Mouse Y");
+        rotationY += Input.GetAxis("Mouse X");
 
-        float wantedRotationAngle = target.eulerAngles.y;
-        float wantedHeight = target.position.y + height;
+        rotationX = Mathf.Clamp(rotationX, -50f, 50f);
 
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = -Input.GetAxis("Mouse Y") * 0.5f;
-
-        currentRotationAngle += mouseX * rotationDamping;
-        currentHeight += mouseY * heightDamping;
-
-        currentHeight = Mathf.Clamp(currentHeight, -5, 5);
-
-        Quaternion currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
-
-        Vector3 position = target.position - currentRotation * Vector3.forward * distance;
-        position.y = currentHeight;
-
+        transform.eulerAngles = new Vector3(rotationX, rotationY, 0);
+        Vector3 finalPosition = Vector3.Lerp(transform.position, target.transform.position -transform.forward * distance, cameraLerp * Time.deltaTime);
+        
         RaycastHit hit;
-        Vector3 direction = position - target.position;
-        if (Physics.Raycast(target.position, direction, out hit, distance))
+        if (Physics.Linecast(target.transform.position, finalPosition, out hit))
         {
-            position = hit.point;
+            //if (hit.distance < distanceToIgnore)
+            //{
+            //    hit.transform.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            //}
+            finalPosition = hit.point;
+            smoothVelocity = Vector3.zero;
+        }
+        else
+        {
+            smoothVelocity = Vector3.Lerp(smoothVelocity, (finalPosition - transform.position) * 10f, Time.deltaTime * 20f);
+            finalPosition += smoothVelocity * Time.deltaTime;
         }
 
-        transform.position = position;
-        transform.LookAt(target);
+        transform.position = finalPosition;
+
+        Vector3 direction = Input.GetAxis("Vertical") * cam.transform.forward + Input.GetAxis("Horizontal") * cam.transform.right;
+        direction.Normalize();
     }
 }
