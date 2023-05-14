@@ -9,7 +9,7 @@ public class EnemyFollow : MonoBehaviour
     private States currenState;
     [SerializeField]
     private GameObject player;
-    private NavMeshAgent agent;
+    [SerializeField] private NavMeshAgent agent;
 
     [SerializeField] public PlayerGame playerGame;
     public int dmg = 10;
@@ -18,7 +18,6 @@ public class EnemyFollow : MonoBehaviour
     private void Awake()
     {
         currenState = States.PATROL;
-        agent = GetComponent<NavMeshAgent>();
     }
     private void Start()
     {
