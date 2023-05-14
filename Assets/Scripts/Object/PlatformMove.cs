@@ -6,14 +6,14 @@ public class PlatformMove : MonoBehaviour
 {
     [SerializeField] public Rigidbody rb;
     [SerializeField] public Transform[] platformPosition;
-    [SerializeField] private float platformSpeed = 10;
+    private float platformSpeed = 3;
     private int currentPosition = 0;
     private int nextPosition = 1;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
-    void Update()
+    void FixedUpdate()
     {
         MovePlatform();
     }

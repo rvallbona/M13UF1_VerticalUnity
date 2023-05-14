@@ -188,6 +188,8 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 0}
   optionsMenuUI: {fileID: 0}
   cheatsMenuUI: {fileID: 0}
+  audioInGame: {fileID: 0}
+  audioMenu: {fileID: 0}
 --- !u!114 &2184461488726958458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,6 +220,8 @@ MonoBehaviour:
   bottle1: 0
   bottle2: 0
   dangerous: {fileID: 0}
+  liveBar: {fileID: 0}
+  maxLive: 100
 --- !u!114 &6826649121404585979
 MonoBehaviour:
   m_ObjectHideFlags: 0

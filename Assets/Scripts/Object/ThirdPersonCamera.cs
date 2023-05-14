@@ -16,7 +16,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     [SerializeField] Camera cam;
 
-    private void LateUpdate()
+    private void Update()
     {
         rotationX += Input.GetAxis("Mouse Y");
         rotationY += Input.GetAxis("Mouse X");

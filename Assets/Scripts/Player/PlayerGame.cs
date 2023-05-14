@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerGame : MonoBehaviour
 {
@@ -13,9 +14,16 @@ public class PlayerGame : MonoBehaviour
     public int bottle2 = 0;
     [SerializeField] GameObject dangerous;
     private float timerSinceDamage;
+
+    //------ UI BAR
+    [SerializeField] private Image liveBar;
+    private float actLive;
+    [SerializeField] private float maxLive;
+
     public void Update()
     {
         timerSinceDamage += Time.deltaTime;
+        liveBarUI();
         ResetLive();
         Danger();
     }
@@ -63,5 +71,11 @@ public class PlayerGame : MonoBehaviour
         {
             live += .01f;
         }
+    }
+
+    void liveBarUI()
+    {
+        actLive = live;
+        liveBar.fillAmount = actLive / maxLive;
     }
 }
