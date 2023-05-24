@@ -10882,11 +10882,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625103f59fcd3714bacfc5df8649e999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &425575886 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2184461488726958455, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
-  m_PrefabInstance: {fileID: 2184461488579323058}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &432995556 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4658347305734828, guid: 03696568ac2c4044b987f5a9954f80c1, type: 3}
@@ -24808,7 +24803,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5616f0bdc8f0f8e439850cd08adad4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 425575886}
+  target: {fileID: 2184461488579323059}
   distance: 12
   distanceToIgnore: 10
   cameraLerp: 80
@@ -56555,8 +56550,17 @@ PrefabInstance:
       propertyPath: dangerous
       value: 
       objectReference: {fileID: 1526010929}
+    - target: {fileID: 6826649121404585979, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
+--- !u!4 &2184461488579323059 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5945932828230065947, guid: ac75b6a04a83ac64c8f3534fe814ed5f, type: 3}
+  m_PrefabInstance: {fileID: 2184461488579323058}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6878240943910580507
 PrefabInstance:
   m_ObjectHideFlags: 0
