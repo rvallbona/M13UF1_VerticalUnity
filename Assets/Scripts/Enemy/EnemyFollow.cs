@@ -15,6 +15,7 @@ public class EnemyFollow : MonoBehaviour
     public int dmg = 10;
 
     [SerializeField] Animator animator;
+
     private void Awake()
     {
         currenState = States.PATROL;
@@ -73,6 +74,7 @@ public class EnemyFollow : MonoBehaviour
         {
             agent.SetDestination(transform.position);
             currenState = States.PATROL;
+            
         }
     }
     private void OnTriggerEnter(Collider other)

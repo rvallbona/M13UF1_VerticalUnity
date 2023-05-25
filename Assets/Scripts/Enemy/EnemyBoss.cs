@@ -17,7 +17,6 @@ public class EnemyBoss : MonoBehaviour
 
     [SerializeField] float range;
     [SerializeField] Transform centrePoint;
-
     void Start()
     {
         currenState = States.PATROL;
@@ -93,7 +92,6 @@ public class EnemyBoss : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Damage");
             playerGame.Damage(dmg);
         }
     }

@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Camera cam;
     Animator anim;
 
-    private bool isPaused;
+    public bool isPaused;
     [SerializeField] GameObject pauseMenuUI, optionsMenuUI, cheatsMenuUI;
 
     Vector3 groundPosition, lastGroundPosition;

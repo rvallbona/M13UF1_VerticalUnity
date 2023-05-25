@@ -6,17 +6,22 @@ public class Item2 : MonoBehaviour
 {
     [SerializeField] PlayerGame playerGame;
     public int value = 1;
-    GameObject bottle2;
+    AudioSource audioBottle;
     private void Start()
     {
-        bottle2 = this.gameObject;
+        audioBottle = GetComponent<AudioSource>();
     }
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             playerGame.Bottle2(value);
-            Destroy(bottle2);
+            Destroy(gameObject);
+            if (audioBottle != null && audioBottle.enabled)
+            {
+                audioBottle.enabled = true;
+                audioBottle.Play();
+            }
         }
     }
 }
