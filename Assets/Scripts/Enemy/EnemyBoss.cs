@@ -17,10 +17,12 @@ public class EnemyBoss : MonoBehaviour
 
     [SerializeField] float range;
     [SerializeField] Transform centrePoint;
+    Animator animator;
     void Start()
     {
         currenState = States.PATROL;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -45,6 +47,7 @@ public class EnemyBoss : MonoBehaviour
             {
                 Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
                 agent.SetDestination(point);
+                animator.SetFloat("Speed", 1);
             }
         }
     }
@@ -75,6 +78,11 @@ public class EnemyBoss : MonoBehaviour
     void ChaseState()
     {
         agent.SetDestination(player.transform.position);
+
+        if (player.transform.position.x <= this.gameObject.transform.position.x && player.transform.position.y <= this.gameObject.transform.position.y && player.transform.position.z <= this.gameObject.transform.position.z)
+        {
+            animator.SetFloat("Speed", 0);
+        }
     }
     bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {

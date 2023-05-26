@@ -30,7 +30,6 @@ public class EnemyFollow : MonoBehaviour
     {
         switch (currenState)
         {
-
             case States.PATROL:
                 PatrolState();
                 break;
@@ -43,6 +42,7 @@ public class EnemyFollow : MonoBehaviour
     {
         Rotate(45f);
         ChaseTransition(player);
+        animator.SetFloat("Speed", 0);
     }
     private void Rotate(float rotation)
     {
@@ -67,14 +67,14 @@ public class EnemyFollow : MonoBehaviour
     private void Walk(GameObject destination)
     {
         agent.SetDestination(destination.transform.position);
+        animator.SetFloat("Speed", 1);
     }
     private void PatrolTransition(GameObject player)
     {
         if (Vector3.Distance(transform.position, player.transform.position) >= 10f)
         {
             agent.SetDestination(transform.position);
-            currenState = States.PATROL;
-            
+            currenState = States.PATROL; 
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -82,6 +82,7 @@ public class EnemyFollow : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerGame.Damage(dmg);
+            animator.SetFloat("Speed", 0);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -89,6 +90,7 @@ public class EnemyFollow : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerGame.Damage(dmg);
+            animator.SetFloat("Speed", 0);
         }
     }
 }

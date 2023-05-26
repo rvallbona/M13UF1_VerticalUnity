@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LoseManager : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.None;
     }
     public void ChangeSceneMenu()
     {

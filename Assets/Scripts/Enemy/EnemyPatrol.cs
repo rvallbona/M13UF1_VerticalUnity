@@ -11,9 +11,11 @@ public class EnemyPatrol : MonoBehaviour
     public int dmg = 10;
     [SerializeField] float range;
     [SerializeField] Transform centrePoint;
+    Animator animator;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -34,6 +36,7 @@ public class EnemyPatrol : MonoBehaviour
         if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
         {
             result = hit.position;
+            animator.SetFloat("Speed", 1);
             return true;
         }
         result = Vector3.zero;
@@ -44,6 +47,7 @@ public class EnemyPatrol : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerGame.Damage(dmg);
+            animator.SetFloat("Speed", 0);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -51,6 +55,7 @@ public class EnemyPatrol : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerGame.Damage(dmg);
+            animator.SetFloat("Speed", 0);
         }
     }
 }
